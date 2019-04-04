@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <default sync-j="4" revision="thud"/>
+  <remote fetch="https://git.yoctoproject.org/git" name="yocto"/>
+  <remote fetch="https://github.com/adorbs" name="adorbs"/>
+  <remote fetch="https://github.com/openembedded" name="oe"/>
+
+  <project remote="yocto" revision="thud" name="poky" path="sources/poky"/>
+  <project remote="oe" revision="thud" name="meta-openembedded" path="sources/meta-openembedded"/>
+  <project remote="yocto" revision="thud" name="meta-raspberrypi" path="sources/meta-raspberrypi"/>
+  <project remote="adorbs" revision="thud" name="meta-otto" path="sources/meta-otto"/>
+</manifest>

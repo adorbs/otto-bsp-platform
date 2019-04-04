@@ -1,2 +1,1 @@
-# otto-distro
-OTTO synthesizer platform
+otto-bsp-platform is intended to provide developers of the OTTO synth an easy to setup environment for OpenEmbedded/Yocto project development. A Repo (https://gerrit.googlesource.com/git-repo/) manifest is provided here to quickly source all of the required metadata to begin building an image for OTTO. In addition, a Vagrantfile (https://vagrantup.com) is provided for those who do not already have Linux systems ready to quickly get started via a virtual machine.
