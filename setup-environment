@@ -144,9 +144,14 @@ export PATH="`echo $PATH | sed 's/\(:.\|:\)*:/:/g;s/^.\?://;s/:.\?$//'`"
 generated_config=
 if [ "$build_dir_setup_enabled" = "true" ]; then
     mv conf/local.conf conf/local.conf.sample
+    TEMPLATES=$CWD/sources/base/conf 
+
+    # If there was already a template local.conf, use that.
+    if [ -f "$TEMPLATES/local.conf.sample" ]; then
+      cp $TEMPLATES/local.conf.sample conf/local.conf.sample
+    fi
 
     # Generate the local.conf based on the Yocto defaults
-    TEMPLATES=$CWD/sources/base/conf 
     grep -v '^#\|^$' conf/local.conf.sample > conf/local.conf
     cat >> conf/local.conf <<EOF
 
@@ -184,11 +189,7 @@ For more information about OpenEmbedded see their website:
 You can now run 'bitbake <target>'
 
 Common targets are:
-    core-image-minimal
-    meta-toolchain
-    meta-toolchain-sdk
-    adt-installer
-    meta-ide-support
+    otto-image
 
 EOF
 
