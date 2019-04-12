@@ -54,7 +54,7 @@ Vagrant.configure('2') do |config|
 		apt-get -q update
 		apt-get purge -q -y snapd lxcfs lxd ubuntu-core-launcher snap-confine
 		apt-get -q -y install gawk wget git-core diffstat unzip texinfo gcc-multilib \
-			build-essential chrpath socat libsdl1.2-dev xterm
+			build-essential chrpath socat libsdl1.2-dev xterm device-tree-compiler
 		apt-get -q -y autoremove
 		apt-get -q -y clean
 		update-locale LC_ALL=C"

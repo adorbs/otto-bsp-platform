@@ -20,5 +20,7 @@ DISABLE_SPLASH = "1"
 ENABLE_I2C = "1"
 ENABLE_SPI_BUS = "1"
 ENABLE_UART = "1"
-RPI_EXTRA_CONFIG = "max_framebuffer_width=320\n \
-					max_framebuffer_height=240"
+RPI_EXTRA_CONFIG = "max_framebuffer_width=320\n\
+					max_framebuffer_height=240\n\
+					dtoverlay=ili9320\
+"
