@@ -4,9 +4,11 @@
   <remote fetch="https://git.yoctoproject.org/git" name="yocto"/>
   <remote fetch="https://github.com/adorbs" name="adorbs"/>
   <remote fetch="https://github.com/openembedded" name="oe"/>
+  <remote fetch="https://github.com/kraj" name="kraj"/>
 
   <project remote="yocto" revision="thud" name="poky" path="sources/poky"/>
   <project remote="oe" revision="thud" name="meta-openembedded" path="sources/meta-openembedded"/>
   <project remote="yocto" revision="thud" name="meta-raspberrypi" path="sources/meta-raspberrypi"/>
   <project remote="adorbs" revision="thud" name="meta-otto" path="sources/meta-otto"/>
+  <project remote="kraj" revision="thud" name="meta-clang" path="sources/meta-clang"/>
 </manifest>
