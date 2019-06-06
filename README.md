@@ -25,7 +25,7 @@ repo sync
 
 Once the source is downloaded, you are ready to set up your local build directory and initiate a build:
 ```
-MACHINE=otto-proto-v1 DISTRO=poky source setup-environment build
+MACHINE=otto-proto-v1 DISTRO=otto source setup-environment build
 bitbake otto-image
 ```
 
