@@ -28,7 +28,14 @@ Once the source is downloaded, you are ready to set up your local build director
 MACHINE=otto-proto-v1 DISTRO=otto source setup-environment build
 bitbake otto-image
 ```
-
+Relative to the build folder, your compiled image will be located at
+```
+build/tmp/deploy/images/otto-proto-v1/otto-image-otto-proto-v1.rpi-sdimg
+```
+This image can be imaged to your SD card with the following command (where /dev/sdX is your sdcard), executed from the build folder:
+```
+sudo dd if=tmp/deploy/images/otto-proto-v1/otto-image-otto-proto-v1.rpi-sdimg of=/dev/sdX bs=1M && sync
+```
 # meta-otto
 
 The otto-bsp-platform repository mainly exists to facilitate build environment setup. The recipes which define the image build are located in the Yocto layer meta-otto, whose source may be found here: https://github.com/adorbs/meta-otto
