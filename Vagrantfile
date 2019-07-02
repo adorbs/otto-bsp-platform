@@ -5,46 +5,29 @@
 ################################################################################
 
 ### Change here for more memory/cores ###
-VM_MEMORY=4096
-VM_CORES=2
+VM_MEMORY=8192
+VM_CORES=8
 
 Vagrant.configure('2') do |config|
-	config.vm.box = 'generic/ubuntu1810'
 
-	config.vm.provider :vmware_fusion do |v, override|
-		v.vmx['memsize'] = VM_MEMORY
-		v.vmx['numvcpus'] = VM_CORES
-	end
+	required_plugins = %w( vagrant-vbguest vagrant-disksize )
+	required_plugins.each do |plugin|
+	  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
+	end		
+
+	config.vm.box = 'ubuntu/bionic64'
+	config.disksize.size = '64GB'
 
 	config.vm.provider :virtualbox do |v, override|
 		v.memory = VM_MEMORY
 		v.cpus = VM_CORES
-
-		required_plugins = %w( vagrant-vbguest )
-		required_plugins.each do |plugin|
-		  system "vagrant plugin install #{plugin}" unless Vagrant.has_plugin? plugin
-		end
-	end
-
-	config.vm.provider :parallels do |v, override|
-		v.memory = VM_MEMORY
-		v.cpus = VM_CORES
-		v.update_guest_tools = true
 	end
 
 	config.vm.provision 'shell' do |s|
 		s.inline = 'echo Setting up machine name'
 
-		config.vm.provider :vmware_fusion do |v, override|
-			v.vmx['displayname'] = "OTTO BSP Platform"
-		end
-
 		config.vm.provider :virtualbox do |v, override|
-			v.name = "OTTO BSP Platform"
-		end
-
-		config.vm.provider :parallels do |v, override|
-			v.name = "OTTO BSP Platform"
+			v.name = "otto-bsp-platform"
 		end
 	end
 
@@ -55,6 +38,8 @@ Vagrant.configure('2') do |config|
 
 	config.vm.provision 'shell', privileged: true, inline:
 		"sed -i 's|deb http://us.archive.ubuntu.com/ubuntu/|deb mirror://mirrors.ubuntu.com/mirrors.txt|g' /etc/apt/sources.list
+		fallocate -l 4G /swapfile && chmod 0600 /swapfile && mkswap /swapfile && swapon /swapfile && echo '/swapfile none swap sw 0 0' >> /etc/fstab
+		echo vm.swappiness = 10 >> /etc/sysctl.conf && echo vm.vfs_cache_pressure 
 		dpkg --add-architecture i386
 		apt-get -q update
 		apt-get purge -q -y snapd lxcfs lxd ubuntu-core-launcher snap-confine
