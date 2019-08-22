@@ -1,2 +1,4 @@
 .repo/*
 sources/*
+build/*
+downloads/*
